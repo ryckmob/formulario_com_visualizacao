@@ -2,8 +2,8 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Formulário Dinâmico</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Formulário Dinâmico com Sim/Não e Copiar</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 p-6">
@@ -11,42 +11,84 @@
 
     <!-- Formulário -->
     <form class="space-y-4" id="formulario">
-      <input class="w-full p-2 border rounded" type="text" id="cliente" placeholder="Cliente">
-      <input class="w-full p-2 border rounded" type="text" id="cpf" placeholder="CPF">
-      <input class="w-full p-2 border rounded" type="text" id="renda" placeholder="Renda: R$">
-      <input class="w-full p-2 border rounded" type="text" id="carteira" placeholder="Tem 3 anos de carteira assinada">
-      <input class="w-full p-2 border rounded" type="text" id="dependente" placeholder="Tem dependente">
-      <input class="w-full p-2 border rounded" type="text" id="profissao" placeholder="Profissão">
-      <input class="w-full p-2 border rounded" type="text" id="cep" placeholder="CEP">
-      <input class="w-full p-2 border rounded" type="text" id="endereco" placeholder="Endereço">
-      <input class="w-full p-2 border rounded" type="text" id="fgts" placeholder="Vai usar FGTS">
-      <input class="w-full p-2 border rounded" type="email" id="email" placeholder="E-mail">
-      <input class="w-full p-2 border rounded" type="text" id="contato" placeholder="Contato">
-      <input class="w-full p-2 border rounded" type="text" id="imovel" placeholder="Imóvel">
-      <input class="w-full p-2 border rounded" type="text" id="corretor" placeholder="Corretor">
-      <input class="w-full p-2 border rounded" type="text" id="avaliacao" placeholder="Valor de avaliação">
-      <input class="w-full p-2 border rounded" type="date" id="dataEnvio" placeholder="Data de envio">
-      <input class="w-full p-2 border rounded" type="text" id="origem" placeholder="Origem do Cliente">
+
+      <div class="flex gap-4">
+        <input class="flex-1 p-2 border rounded" type="text" id="cliente" placeholder="Cliente">
+        <input class="flex-1 p-2 border rounded" type="text" id="cpf" placeholder="CPF">
+      </div>
+
+      <div class="flex gap-4">
+        <input class="flex-1 p-2 border rounded" type="text" id="renda" placeholder="Renda: R$">
+        <select class="flex-1 p-2 border rounded" id="carteira">
+          <option value="">Tem 3 anos de carteira assinada?</option>
+          <option value="Sim">Sim</option>
+          <option value="Não">Não</option>
+        </select>
+      </div>
+
+      <div class="flex gap-4">
+        <select class="flex-1 p-2 border rounded" id="dependente">
+          <option value="">Tem dependente?</option>
+          <option value="Sim">Sim</option>
+          <option value="Não">Não</option>
+        </select>
+        <input class="flex-1 p-2 border rounded" type="text" id="profissao" placeholder="Profissão">
+      </div>
+
+      <div class="flex gap-4">
+        <input class="flex-1 p-2 border rounded" type="text" id="cep" placeholder="CEP">
+        <input class="flex-1 p-2 border rounded" type="text" id="endereco" placeholder="Endereço">
+      </div>
+
+      <div class="flex gap-4">
+        <select class="flex-1 p-2 border rounded" id="fgts">
+          <option value="">Vai usar FGTS?</option>
+          <option value="Sim">Sim</option>
+          <option value="Não">Não</option>
+        </select>
+        <input class="flex-1 p-2 border rounded" type="email" id="email" placeholder="E-mail">
+      </div>
+
+      <div class="flex gap-4">
+        <input class="flex-1 p-2 border rounded" type="text" id="contato" placeholder="Contato">
+        <input class="flex-1 p-2 border rounded" type="text" id="imovel" placeholder="Imóvel">
+      </div>
+
+      <div class="flex gap-4">
+        <input class="flex-1 p-2 border rounded" type="text" id="corretor" placeholder="Corretor">
+        <input class="flex-1 p-2 border rounded" type="text" id="avaliacao" placeholder="Valor de avaliação">
+      </div>
+
+      <div class="flex gap-4">
+        <input class="flex-1 p-2 border rounded" type="date" id="dataEnvio" placeholder="Data de envio">
+        <input class="flex-1 p-2 border rounded" type="text" id="origem" placeholder="Origem do Cliente">
+      </div>
+
     </form>
 
-    <!-- Texto dinâmico -->
-    <div class="bg-gray-50 p-4 rounded-lg border text-lg leading-relaxed whitespace-pre-wrap" id="preview">
-      👤 Cliente:  
-      🆔 CPF:  
-      💰 Renda: R$  
-      📄 Tem 3 anos de carteira assinada:  
-      👶 Tem dependente:  
-      💼 Profissão:  
-      📍 CEP:  
-      🏠 Endereço:  
-      🏦 Vai usar FGTS:  
-      📧 E-mail:  
-      📞 Contato:  
-      🏡 Imóvel:  
-      🧑‍💼 Corretor:  
-      💵 Valor de avaliação:  
-      📅 Data de envio:  
-      🌐 Origem do Cliente:
+    <!-- Pré-visualização + botão copiar -->
+    <div class="flex flex-col h-full">
+      <div id="preview" class="flex-1 overflow-y-auto bg-gray-50 p-4 rounded-lg border text-lg leading-relaxed whitespace-pre-wrap">
+        👤 Cliente:  
+        🆔 CPF:  
+        💰 Renda: R$  
+        📄 Tem 3 anos de carteira assinada:  
+        👶 Tem dependente:  
+        💼 Profissão:  
+        📍 CEP:  
+        🏠 Endereço:  
+        🏦 Vai usar FGTS:  
+        📧 E-mail:  
+        📞 Contato:  
+        🏡 Imóvel:  
+        🧑‍💼 Corretor:  
+        💵 Valor de avaliação:  
+        📅 Data de envio:  
+        🌐 Origem do Cliente:
+      </div>
+      <button onclick="copiarTexto()" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+        📋 Copiar
+      </button>
     </div>
 
   </div>
@@ -80,10 +122,18 @@
       document.getElementById("preview").textContent = output;
     };
 
-    // Escuta todos os inputs
-    document.querySelectorAll("#formulario input").forEach(input => {
+    document.querySelectorAll("#formulario input, #formulario select").forEach(input => {
       input.addEventListener("input", atualizarPreview);
     });
+
+    function copiarTexto() {
+      const texto = document.getElementById("preview").textContent;
+      navigator.clipboard.writeText(texto).then(() => {
+        alert("Texto copiado com sucesso!");
+      }).catch(() => {
+        alert("Erro ao copiar.");
+      });
+    }
   </script>
 </body>
 </html>
