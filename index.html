@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulário Dinâmico</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+  <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-md p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <!-- Formulário -->
+    <form class="space-y-4" id="formulario">
+      <input class="w-full p-2 border rounded" type="text" id="cliente" placeholder="Cliente">
+      <input class="w-full p-2 border rounded" type="text" id="cpf" placeholder="CPF">
+      <input class="w-full p-2 border rounded" type="text" id="renda" placeholder="Renda: R$">
+      <input class="w-full p-2 border rounded" type="text" id="carteira" placeholder="Tem 3 anos de carteira assinada">
+      <input class="w-full p-2 border rounded" type="text" id="dependente" placeholder="Tem dependente">
+      <input class="w-full p-2 border rounded" type="text" id="profissao" placeholder="Profissão">
+      <input class="w-full p-2 border rounded" type="text" id="cep" placeholder="CEP">
+      <input class="w-full p-2 border rounded" type="text" id="endereco" placeholder="Endereço">
+      <input class="w-full p-2 border rounded" type="text" id="fgts" placeholder="Vai usar FGTS">
+      <input class="w-full p-2 border rounded" type="email" id="email" placeholder="E-mail">
+      <input class="w-full p-2 border rounded" type="text" id="contato" placeholder="Contato">
+      <input class="w-full p-2 border rounded" type="text" id="imovel" placeholder="Imóvel">
+      <input class="w-full p-2 border rounded" type="text" id="corretor" placeholder="Corretor">
+      <input class="w-full p-2 border rounded" type="text" id="avaliacao" placeholder="Valor de avaliação">
+      <input class="w-full p-2 border rounded" type="date" id="dataEnvio" placeholder="Data de envio">
+      <input class="w-full p-2 border rounded" type="text" id="origem" placeholder="Origem do Cliente">
+    </form>
+
+    <!-- Texto dinâmico -->
+    <div class="bg-gray-50 p-4 rounded-lg border text-lg leading-relaxed whitespace-pre-wrap" id="preview">
+      👤 Cliente:  
+      🆔 CPF:  
+      💰 Renda: R$  
+      📄 Tem 3 anos de carteira assinada:  
+      👶 Tem dependente:  
+      💼 Profissão:  
+      📍 CEP:  
+      🏠 Endereço:  
+      🏦 Vai usar FGTS:  
+      📧 E-mail:  
+      📞 Contato:  
+      🏡 Imóvel:  
+      🧑‍💼 Corretor:  
+      💵 Valor de avaliação:  
+      📅 Data de envio:  
+      🌐 Origem do Cliente:
+    </div>
+
+  </div>
+
+  <script>
+    const campos = {
+      cliente: "👤 Cliente",
+      cpf: "🆔 CPF",
+      renda: "💰 Renda: R$",
+      carteira: "📄 Tem 3 anos de carteira assinada",
+      dependente: "👶 Tem dependente",
+      profissao: "💼 Profissão",
+      cep: "📍 CEP",
+      endereco: "🏠 Endereço",
+      fgts: "🏦 Vai usar FGTS",
+      email: "📧 E-mail",
+      contato: "📞 Contato",
+      imovel: "🏡 Imóvel",
+      corretor: "🧑‍💼 Corretor",
+      avaliacao: "💵 Valor de avaliação",
+      dataEnvio: "📅 Data de envio",
+      origem: "🌐 Origem do Cliente"
+    };
+
+    const atualizarPreview = () => {
+      let output = "";
+      for (const id in campos) {
+        const valor = document.getElementById(id).value;
+        output += `${campos[id]}: ${valor || ""}\n`;
+      }
+      document.getElementById("preview").textContent = output;
+    };
+
+    // Escuta todos os inputs
+    document.querySelectorAll("#formulario input").forEach(input => {
+      input.addEventListener("input", atualizarPreview);
+    });
+  </script>
+</body>
+</html>
