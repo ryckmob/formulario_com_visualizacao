@@ -55,7 +55,12 @@
       </div>
 
       <div class="flex gap-4">
+        <input disabled class="flex-1 p-2 border rounded bg-gray-100" type="text" id="corretor" value="Luiz Henrique Chaves de Oliveira Luz">
         <input class="flex-1 p-2 border rounded" type="text" id="avaliacao" placeholder="Valor de avaliação">
+      </div>
+
+      <div class="flex gap-4">
+        <input disabled class="flex-1 p-2 border rounded bg-gray-100" type="text" id="dataEnvio">
         <input class="flex-1 p-2 border rounded" type="text" id="origem" placeholder="Origem do Cliente">
       </div>
 
@@ -64,7 +69,22 @@
     <!-- Pré-visualização + botão copiar -->
     <div class="flex flex-col h-full">
       <div id="preview" class="flex-1 overflow-y-auto bg-gray-50 p-4 rounded-lg border text-base leading-relaxed whitespace-pre-wrap font-mono">
-        <!-- Conteúdo dinâmico aqui -->
+        Cliente:  
+        CPF:  
+        Renda: R$  
+        Tem 3 anos de carteira assinada:  
+        Tem dependente:  
+        Profissão:  
+        CEP:  
+        Endereço:  
+        Vai usar FGTS:  
+        E-mail:  
+        Contato:  
+        Imóvel:  
+        Corretor: Luiz Henrique Chaves de Oliveira Luz  
+        Valor de avaliação:  
+        Data de envio:  
+        Origem do Cliente:
       </div>
       <button onclick="copiarTexto()" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
         Copiar Texto
@@ -87,29 +107,33 @@
       email: "E-mail",
       contato: "Contato",
       imovel: "Imóvel",
+      corretor: "Corretor",
       avaliacao: "Valor de avaliação",
+      dataEnvio: "Data de envio",
       origem: "Origem do Cliente"
     };
 
-    const corretorFixo = "Luiz Henrique Chaves de Oliveira Luz";
+    // Preencher valores fixos automaticamente
+    document.getElementById("corretor").value = "Luiz Henrique Chaves de Oliveira Luz";
+
+    const hoje = new Date().toLocaleDateString('pt-BR');
+    document.getElementById("dataEnvio").value = hoje;
 
     const atualizarPreview = () => {
       let output = "";
       for (const id in campos) {
-        const valor = document.getElementById(id).value;
+        const el = document.getElementById(id);
+        const valor = el ? el.value : "";
         output += `${campos[id]}: ${valor || ""}\n`;
       }
-
-      const dataHoje = new Date().toLocaleDateString("pt-BR");
-      output += `Corretor: ${corretorFixo}\n`;
-      output += `Data de envio: ${dataHoje}\n`;
-
       document.getElementById("preview").textContent = output;
     };
 
     document.querySelectorAll("#formulario input, #formulario select").forEach(input => {
       input.addEventListener("input", atualizarPreview);
     });
+
+    atualizarPreview(); // inicializa com os valores automáticos
 
     function copiarTexto() {
       const texto = document.getElementById("preview").textContent;
@@ -119,9 +143,6 @@
         alert("Erro ao copiar.");
       });
     }
-
-    // Atualiza preview ao carregar página com data e corretor
-    window.addEventListener("DOMContentLoaded", atualizarPreview);
   </script>
 </body>
 </html>
