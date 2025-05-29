@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Formulário Dinâmico com Sim/Não e Copiar</title>
+  <title>Formulário Dinâmico Profissional</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 p-6">
@@ -68,26 +68,26 @@
 
     <!-- Pré-visualização + botão copiar -->
     <div class="flex flex-col h-full">
-      <div id="preview" class="flex-1 overflow-y-auto bg-gray-50 p-4 rounded-lg border text-lg leading-relaxed whitespace-pre-wrap">
-        👤 Cliente:  
-        🆔 CPF:  
-        💰 Renda: R$  
-        📄 Tem 3 anos de carteira assinada:  
-        👶 Tem dependente:  
-        💼 Profissão:  
-        📍 CEP:  
-        🏠 Endereço:  
-        🏦 Vai usar FGTS:  
-        📧 E-mail:  
-        📞 Contato:  
-        🏡 Imóvel:  
-        🧑‍💼 Corretor:  
-        💵 Valor de avaliação:  
-        📅 Data de envio:  
-        🌐 Origem do Cliente:
+      <div id="preview" class="flex-1 overflow-y-auto bg-gray-50 p-4 rounded-lg border text-base leading-relaxed whitespace-pre-wrap font-mono">
+        Cliente:  
+        CPF:  
+        Renda: R$  
+        Tem 3 anos de carteira assinada:  
+        Tem dependente:  
+        Profissão:  
+        CEP:  
+        Endereço:  
+        Vai usar FGTS:  
+        E-mail:  
+        Contato:  
+        Imóvel:  
+        Corretor:  
+        Valor de avaliação:  
+        Data de envio:  
+        Origem do Cliente:
       </div>
       <button onclick="copiarTexto()" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-        📋 Copiar
+        Copiar Texto
       </button>
     </div>
 
@@ -95,22 +95,22 @@
 
   <script>
     const campos = {
-      cliente: "👤 Cliente",
-      cpf: "🆔 CPF",
-      renda: "💰 Renda: R$",
-      carteira: "📄 Tem 3 anos de carteira assinada",
-      dependente: "👶 Tem dependente",
-      profissao: "💼 Profissão",
-      cep: "📍 CEP",
-      endereco: "🏠 Endereço",
-      fgts: "🏦 Vai usar FGTS",
-      email: "📧 E-mail",
-      contato: "📞 Contato",
-      imovel: "🏡 Imóvel",
-      corretor: "🧑‍💼 Corretor",
-      avaliacao: "💵 Valor de avaliação",
-      dataEnvio: "📅 Data de envio",
-      origem: "🌐 Origem do Cliente"
+      cliente: "Cliente",
+      cpf: "CPF",
+      renda: "Renda: R$",
+      carteira: "Tem 3 anos de carteira assinada",
+      dependente: "Tem dependente",
+      profissao: "Profissão",
+      cep: "CEP",
+      endereco: "Endereço",
+      fgts: "Vai usar FGTS",
+      email: "E-mail",
+      contato: "Contato",
+      imovel: "Imóvel",
+      corretor: "Corretor",
+      avaliacao: "Valor de avaliação",
+      dataEnvio: "Data de envio",
+      origem: "Origem do Cliente"
     };
 
     const atualizarPreview = () => {
