@@ -147,22 +147,22 @@
 
   <script>
     const campos = {
-      cliente: "Cliente",
-      cpf: "CPF",
+      cliente: "Cliente:",
+      cpf: "CPF:",
       renda: "Renda: R$",
-      carteira: "Tem 3 anos de carteira assinada",
-      dependente: "Tem dependente",
-      profissao: "Profissão",
-      cep: "CEP",
-      endereco: "Endereço",
-      fgts: "Vai usar FGTS",
-      email: "E-mail",
-      contato: "Contato",
-      imovel: "Imóvel",
-      corretor: "Corretor",
-      avaliacao: "Valor de avaliação",
-      dataEnvio: "Data de envio",
-      origem: "Origem do Cliente"
+      carteira: "Tem 3 anos de carteira assinada:",
+      dependente: "Tem dependente:",
+      profissao: "Profissão:",
+      cep: "CEP:",
+      endereco: "Endereço:",
+      fgts: "Vai usar FGTS:",
+      email: "E-mail:",
+      contato: "Contato:",
+      imovel: "Imóvel:",
+      corretor: "Corretor:",
+      avaliacao: "Valor de avaliação:",
+      dataEnvio: "Data de envio:",
+      origem: "Origem do Cliente:"
     };
 
     document.getElementById("corretor").value = "Luiz Henrique Chaves de Oliveira Luz";
@@ -172,7 +172,7 @@
       let output = "";
       for (const id in campos) {
         const el = document.getElementById(id);
-        output += `${campos[id]}: ${el?.value || ""}\n`;
+        output += `${campos[id]} ${el?.value || ""}\n`;
       }
       document.getElementById("preview").textContent = output;
     };
