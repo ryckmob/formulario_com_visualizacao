@@ -92,6 +92,17 @@
 
       <div class="flex flex-col md:flex-row gap-4">
         <div class="w-full md:w-1/2">
+          <label for="contato" class="block text-sm font-medium mb-1">Contato</label>
+          <input class="w-full p-2 border rounded" type="text" id="contato">
+        </div>
+        <div class="w-full md:w-1/2">
+          <label for="localizaçãoimovel" class="block text-sm font-medium mb-1">Localização do Imóvel</label>
+          <input class="w-full p-2 border rounded" type="text" id="localizacaoimovel">
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row gap-4">
+        <div class="w-full md:w-1/2">
           <label for="corretor" class="block text-sm font-medium mb-1">Corretor</label>
           <input class="w-full p-2 border rounded bg-gray-100" type="text" id="corretor" >
         </div>
@@ -132,7 +143,8 @@
         Vai usar FGTS:  
         E-mail:  
         Contato:  
-        Imóvel:  
+        Imóvel:
+        Localização do Imóvel
         Corretor: Luiz Henrique Chaves de Oliveira Luz  
         Valor de avaliação:  
         Data de envio:  
@@ -146,51 +158,60 @@
   </div>
 
   <script>
-    const campos = {
-      cliente: "Cliente:",
-      cpf: "CPF:",
-      renda: "Renda: R$",
-      carteira: "Tem 3 anos de carteira assinada:",
-      dependente: "Tem dependente:",
-      profissao: "Profissão:",
-      cep: "CEP:",
-      endereco: "Endereço:",
-      fgts: "Vai usar FGTS:",
-      email: "E-mail:",
-      contato: "Contato:",
-      imovel: "Imóvel:",
-      corretor: "Corretor:",
-      avaliacao: "Valor de avaliação:",
-      dataEnvio: "Data de envio:",
-      origem: "Origem do Cliente:"
-    };
+  const campos = {
+    cliente: "Cliente:",
+    cpf: "CPF:",
+    renda: "Renda: R$",
+    carteira: "Tem 3 anos de carteira assinada:",
+    dependente: "Tem dependente:",
+    profissao: "Profissão:",
+    cep: "CEP:",
+    endereco: "Endereço:",
+    fgts: "Vai usar FGTS:",
+    email: "E-mail:",
+    contato: "Contato:",
+    imovel: "Imóvel:",
+    localizacaoimovel: "Localização do Imóvel",
+    corretor: "Corretor:",
+    avaliacao: "Valor de avaliação:",
+    dataEnvio: "Data de envio:",
+    origem: "Origem do Cliente:"
+  };
 
-    document.getElementById("corretor").value = "Luiz Henrique Chaves de Oliveira Luz";
-    document.getElementById("dataEnvio").value = new Date().toLocaleDateString('pt-BR');
+  // Preenche os campos automáticos
+  document.getElementById("corretor").value = "Luiz Henrique Chaves de Oliveira Luz";
+  document.getElementById("dataEnvio").value = new Date().toLocaleDateString('pt-BR');
 
-    const atualizarPreview = () => {
-      let output = "";
-      for (const id in campos) {
-        const el = document.getElementById(id);
-        output += `${campos[id]} ${el?.value || ""}\n`;
-      }
-      document.getElementById("preview").textContent = output;
-    };
-
-    document.querySelectorAll("#formulario input, #formulario select").forEach(input => {
-      input.addEventListener("input", atualizarPreview);
-    });
-
-    atualizarPreview();
-
-    function copiarTexto() {
-      const texto = document.getElementById("preview").textContent;
-      navigator.clipboard.writeText(texto).then(() => {
-        alert("Texto copiado com sucesso!");
-      }).catch(() => {
-        alert("Erro ao copiar.");
-      });
+  const atualizarPreview = () => {
+    let output = "";
+    for (const id in campos) {
+      const el = document.getElementById(id);
+      const label = campos[id];
+      const valor = el ? el.value : "";
+      output += `${label} ${valor}\n`;
     }
-  </script>
+    document.getElementById("preview").textContent = output.trim();
+  };
+
+  // Atualiza preview ao digitar ou alterar valores
+  document.querySelectorAll("#formulario input, #formulario select").forEach(input => {
+    input.addEventListener("input", atualizarPreview);
+    input.addEventListener("change", atualizarPreview);
+  });
+
+  // Função de cópia
+  function copiarTexto() {
+    const texto = document.getElementById("preview").textContent;
+    navigator.clipboard.writeText(texto).then(() => {
+      alert("Texto copiado com sucesso!");
+    }).catch(err => {
+      alert("Erro ao copiar: " + err);
+    });
+  }
+
+  // Inicializa com os valores padrão
+  atualizarPreview();
+</script>
+
 </body>
 </html>
