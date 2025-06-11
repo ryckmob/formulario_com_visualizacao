@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ESPARTA IMOB</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    };
+  </script>
+</head>
+<body class="bg-yellow-50 dark:bg-gray-900 p-6 text-yellow-900 dark:text-gray-100">
+
+  <!-- Botão para alternar tema -->
+  <div class="flex justify-end mb-4">
+    <button onclick="toggleTema()" class="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700 dark:bg-gray-700 dark:hover:bg-gray-600">
+      Alternar Tema
+    </button>
+  </div>
+
+  <div class="max-w-6xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <form class="space-y-6" id="formulario">
+  <div>
+    <label for="cliente" class="block text-sm font-medium text-yellow-800 dark:text-gray-200">Cliente</label>
+    <input type="text" id="cliente" name="cliente"
+      class="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+      placeholder="Nome completo">
+  </div>
+
+  <div>
+    <label for="cpf" class="block text-sm font-medium text-yellow-800 dark:text-gray-200">CPF</label>
+    <input type="text" id="cpf" name="cpf" oninput="mascaraCPF(this)"
+      class="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+      placeholder="000.000.000-00">
+  </div>
+
+  <div>
+    <label for="renda" class="block text-sm font-medium text-yellow-800 dark:text-gray-200">Renda</label>
+    <input type="number" id="renda" name="renda"
+      class="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+      placeholder="R$">
+  </div>
+
+  <div>
+    <label for="anos_carteira" class="block text-sm font-medium text-yellow-800 dark:text-gray-200">Tem 3 anos de carteira assinada?</label>
+    <select id="anos_carteira" name="anos_carteira"
+      class="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+      <option>Sim</option>
+      <option>Não</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="dependente" class="block text-sm font-medium text-yellow-800 dark:text-gray-200">Tem dependente?</label>
+    <select id="dependente" name="dependente"
+      class="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+      <option>Sim</option>
+      <option>Não</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="profissao" class="block text-sm font-medium text-yellow-800 dark:text-gray-200">Profissão</label>
+    <input type="text" id="profissao" name="profissao"
+      class="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+  </div>
+
+  <div>
+    <label for="cep" class="block text-sm font-medium text-yellow-800 dark:text-gray-200">CEP</label>
+    <input type="text" id="cep" name="cep"
+      class="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+  </div>
+
+  <div>
+    <label for="endereco" class="block text-sm font-medium text-yellow-800 dark:text-gray-200">Endereço</label>
+    <input type="text" id="endereco" name="endereco"
+      class="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+  </div>
+
+  <div>
+    <label for="fgts" class="block text-sm font-medium text-yellow-800 dark:text-gray-200">Vai usar FGTS?</label>
+    <select id="fgts" name="fgts"
+      class="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+      <option>Sim</option>
+      <option>Não</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="email" class="block text-sm font-medium text-yellow-800 dark:text-gray-200">E-mail</label>
+    <input type="email" id="email" name="email"
+      class="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+  </div>
+
+  <div>
+    <label for="contato" class="block text-sm font-medium text-yellow-800 dark:text-gray-200">Contato</label>
+    <input type="text" id="contato" name="contato" oninput="mascaraContato(this)"
+      class="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+      placeholder="(99) 99999-9999">
+  </div>
+
+  <div>
+    <label for="imovel" class="block text-sm font-medium text-yellow-800 dark:text-gray-200">Imóvel</label>
+    <textarea id="imovel" name="imovel"
+      class="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"></textarea>
+  </div>
+
+  <div>
+    <label for="localizacao" class="block text-sm font-medium text-yellow-800 dark:text-gray-200">Localização do Imóvel</label>
+    <input type="text" id="localizacao" name="localizacao"
+      class="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+  </div>
+
+  <div>
+    <label for="corretor" class="block text-sm font-medium text-yellow-800 dark:text-gray-200">Corretor</label>
+    <input type="text" id="corretor" name="corretor"
+      class="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+  </div>
+
+  <div>
+    <label for="avaliacao" class="block text-sm font-medium text-yellow-800 dark:text-gray-200">Valor de Avaliação</label>
+    <input type="number" id="avaliacao" name="avaliacao"
+      class="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+  </div>
+
+  <div>
+    <label for="data_envio" class="block text-sm font-medium text-yellow-800 dark:text-gray-200">Data de Envio</label>
+    <input type="date" id="data_envio" name="data_envio"
+      class="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+  </div>
+
+  <div>
+    <label for="origem" class="block text-sm font-medium text-yellow-800 dark:text-gray-200">Origem do Cliente</label>
+    <input type="text" id="origem" name="origem"
+      class="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+  </div>
+</form>
+
+
+    <!-- Pré-visualização + botão copiar -->
+    <div class="flex flex-col h-full">
+      <div id="preview" class="flex-1 overflow-y-auto bg-yellow-100 dark:bg-gray-700 p-4 rounded-lg border border-gray-300 dark:border-gray-600 text-base leading-relaxed whitespace-pre-wrap font-mono">
+        Cliente:  
+        CPF:  
+        Renda: R$  
+        Tem 3 anos de carteira assinada:  
+        Tem dependente:  
+        Profissão:  
+        CEP:  
+        Endereço:  
+        Vai usar FGTS:  
+        E-mail:  
+        Contato:  
+        Imóvel:
+        Localização do Imóvel:
+        Corretor:  
+        Valor de avaliação:  
+        Data de envio:  
+        Origem do Cliente:
+      </div>
+      <button onclick="copiarTexto()" class="mt-4 px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700 dark:bg-gray-700 dark:hover:bg-gray-600">
+        Copiar
+      </button>
+    </div>
+  </div>
+
+  <script>
+    function toggleTema() {
+      document.documentElement.classList.toggle('dark');
+    }
+
+    function mascaraCPF(campo) {
+      campo.value = campo.value
+        .replace(/\D/g, "")
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+    }
+
+    function mascaraContato(campo) {
+      campo.value = campo.value
+        .replace(/\D/g, "")
+        .replace(/^(\d{2})(\d)/g, "($1) $2")
+        .replace(/(\d{5})(\d)/, "$1-$2");
+    }
+
+    function copiarTexto() {
+      const texto = document.getElementById("preview").innerText;
+      navigator.clipboard.writeText(texto);
+      alert("Texto copiado!");
+    }
+  </script>
+</body>
+</html>
