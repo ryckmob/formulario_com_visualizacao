@@ -7,45 +7,31 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-yellow-50 p-6 text-yellow-900">
-  <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-md p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div class="max-w-6xl mx-auto bg-white rounded-2xl shadow-xl p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
 
-    <!-- Formulário -->
-    <form class="space-y-4" id="formulario">
+    <form class="space-y-6" id="formulario">
 
+      <!-- LINHA 1 -->
       <div class="flex flex-col md:flex-row gap-4">
         <div class="w-full md:w-1/2">
-          <label for="cliente" class="block text-sm font-medium mb-1">Cliente</label>
-          <input class="w-full p-2 border rounded" type="text" id="cliente">
+          <label for="cliente" class="block text-sm font-semibold mb-1">Cliente</label>
+          <input class="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-500" type="text" id="cliente">
         </div>
         <div class="w-full md:w-1/2">
-          <label for="cpf" class="block text-sm font-medium mb-1">CPF</label>
-          <input class="w-full p-2 border rounded" type="text" id="cpf" maxlength="14" oninput="mascaraCPF(this)">
-
-          <script>
-          function mascaraCPF(input) {
-            let value = input.value.replace(/\D/g, '');
-          
-            if (value.length > 11) value = value.slice(0, 11);
-          
-            value = value.replace(/(\d{3})(\d)/, '$1.$2');
-            value = value.replace(/(\d{3})(\d)/, '$1.$2');
-            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-          
-            input.value = value;
-          }
-          </script>
-
+          <label for="cpf" class="block text-sm font-semibold mb-1">CPF</label>
+          <input class="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900" type="text" id="cpf" maxlength="14" oninput="mascaraCPF(this)">
         </div>
       </div>
 
+      <!-- LINHA 2 -->
       <div class="flex flex-col md:flex-row gap-4">
         <div class="w-full md:w-1/2">
-          <label for="renda" class="block text-sm font-medium mb-1">Renda: R$</label>
-          <input class="w-full p-2 border rounded" type="text" id="renda">
+          <label for="renda" class="block text-sm font-semibold mb-1">Renda: R$</label>
+          <input class="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900" type="text" id="renda">
         </div>
         <div class="w-full md:w-1/2">
-          <label for="carteira" class="block text-sm font-medium mb-1">Tem 3 anos de carteira assinada?</label>
-          <select class="w-full p-2 border rounded" id="carteira">
+          <label for="carteira" class="block text-sm font-semibold mb-1">Tem 3 anos de carteira assinada?</label>
+          <select class="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900" id="carteira">
             <option value="">Selecione</option>
             <option value="Sim">Sim</option>
             <option value="Não">Não</option>
@@ -53,93 +39,83 @@
         </div>
       </div>
 
+      <!-- LINHA 3 -->
       <div class="flex flex-col md:flex-row gap-4">
         <div class="w-full md:w-1/2">
-          <label for="dependente" class="block text-sm font-medium mb-1">Tem dependente?</label>
-          <select class="w-full p-2 border rounded" id="dependente">
+          <label for="dependente" class="block text-sm font-semibold mb-1">Tem dependente?</label>
+          <select class="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900" id="dependente">
             <option value="">Selecione</option>
             <option value="Sim">Sim</option>
             <option value="Não">Não</option>
           </select>
         </div>
         <div class="w-full md:w-1/2">
-          <label for="profissao" class="block text-sm font-medium mb-1">Profissão</label>
-          <input class="w-full p-2 border rounded" type="text" id="profissao">
+          <label for="profissao" class="block text-sm font-semibold mb-1">Profissão</label>
+          <input class="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900" type="text" id="profissao">
         </div>
       </div>
 
+      <!-- LINHA 4 -->
       <div class="flex flex-col md:flex-row gap-4">
         <div class="w-full md:w-1/2">
-          <label for="cep" class="block text-sm font-medium mb-1">CEP</label>
-          <input class="w-full p-2 border rounded" type="text" id="cep">
+          <label for="cep" class="block text-sm font-semibold mb-1">CEP</label>
+          <input class="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900" type="text" id="cep">
         </div>
         <div class="w-full md:w-1/2">
-          <label for="endereco" class="block text-sm font-medium mb-1">Endereço</label>
-          <input class="w-full p-2 border rounded" type="text" id="endereco">
+          <label for="endereco" class="block text-sm font-semibold mb-1">Endereço</label>
+          <input class="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900" type="text" id="endereco">
         </div>
       </div>
 
+      <!-- LINHA 5 -->
       <div class="flex flex-col md:flex-row gap-4">
         <div class="w-full md:w-1/2">
-          <label for="fgts" class="block text-sm font-medium mb-1">Vai usar FGTS?</label>
-          <select class="w-full p-2 border rounded" id="fgts">
+          <label for="fgts" class="block text-sm font-semibold mb-1">Vai usar FGTS?</label>
+          <select class="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900" id="fgts">
             <option value="">Selecione</option>
             <option value="Sim">Sim</option>
             <option value="Não">Não</option>
           </select>
         </div>
         <div class="w-full md:w-1/2">
-          <label for="email" class="block text-sm font-medium mb-1">E-mail</label>
-          <input class="w-full p-2 border rounded" type="email" id="email">
+          <label for="email" class="block text-sm font-semibold mb-1">E-mail</label>
+          <input class="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900" type="email" id="email">
         </div>
       </div>
 
+      <!-- LINHA 6 -->
       <div class="flex flex-col md:flex-row gap-4">
         <div class="w-full md:w-1/2">
-          <label for="imovel" class="block text-sm font-medium mb-1">Imóvel</label>
-          <input class="w-full p-2 border rounded" type="text" id="imovel">
+          <label for="imovel" class="block text-sm font-semibold mb-1">Imóvel</label>
+          <input class="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900" type="text" id="imovel">
         </div>
-
         <div class="w-full md:w-1/2">
-          <label for="localizaçãoimovel" class="block text-sm font-medium mb-1">Localização do Imóvel</label>
-          <input class="w-full p-2 border rounded" type="text" id="localizacaoimovel">
+          <label for="localizacaoimovel" class="block text-sm font-semibold mb-1">Localização do Imóvel</label>
+          <input class="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900" type="text" id="localizacaoimovel">
         </div>
       </div>
 
+      <!-- LINHA 7 -->
       <div class="flex flex-col md:flex-row gap-4">
         <div class="w-full md:w-1/2">
-          <label for="contato" class="block text-sm font-medium mb-1">Contato</label>
-          <input class="w-full p-2 border rounded" type="text" id="contato" maxlength="16" oninput="mascaraContato(this)">
-
-          <script>
-          function mascaraContato(input) {
-            let value = input.value.replace(/\D/g, '');
-          
-            if (value.length > 11) value = value.slice(0, 11);
-          
-            value = value.replace(/^(\d{2})(\d)/, '($1) $2');
-            value = value.replace(/(\d{1})(\d{4})(\d{4})$/, '$1 $2-$3');
-          
-            input.value = value;
-          }
-          </script>
-
-
+          <label for="contato" class="block text-sm font-semibold mb-1">Contato</label>
+          <input class="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900" type="text" id="contato" maxlength="16" oninput="mascaraContato(this)">
         </div>
         <div class="w-full md:w-1/2">
-          <label for="avaliacao" class="block text-sm font-medium mb-1">Valor de avaliação</label>
-          <input class="w-full p-2 border rounded" type="text" id="avaliacao">
+          <label for="avaliacao" class="block text-sm font-semibold mb-1">Valor de avaliação</label>
+          <input class="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900" type="text" id="avaliacao">
         </div>
       </div>
 
+      <!-- LINHA 8 -->
       <div class="flex flex-col md:flex-row gap-4">
         <div class="w-full md:w-1/2">
-          <label for="corretor" class="block text-sm font-medium mb-1">Corretor</label>
-          <input class="w-full p-2 border rounded bg-gray-100" type="text" id="corretor" >
+          <label for="corretor" class="block text-sm font-semibold mb-1">Corretor</label>
+          <input class="w-full p-3 border border-gray-300 rounded-md bg-gray-100 text-gray-900" type="text" id="corretor">
         </div>
         <div class="w-full md:w-1/2">
-          <label for="origem" class="block text-sm font-medium mb-1">Origem do Cliente</label>
-          <select class="w-full p-2 border rounded" id="origem">
+          <label for="origem" class="block text-sm font-semibold mb-1">Origem do Cliente</label>
+          <select class="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900" id="origem">
             <option value="">Selecione</option>
             <option value="Lead">Lead</option>
             <option value="Base">Base</option>
@@ -151,15 +127,16 @@
         </div>
       </div>
 
+      <!-- LINHA 9 -->
       <div class="flex flex-col md:flex-row gap-4">
         <div class="w-full md:w-1/2">
-          <label for="dataEnvio" class="block text-sm font-medium mb-1">Data de envio</label>
-          <input disabled class="w-full p-2 border rounded bg-gray-100" type="text" id="dataEnvio">
+          <label for="dataEnvio" class="block text-sm font-semibold mb-1">Data de envio</label>
+          <input disabled class="w-full p-3 border border-gray-300 rounded-md bg-gray-100 text-gray-600" type="text" id="dataEnvio">
         </div>
       </div>
 
     </form>
-
+    
     <!-- Pré-visualização + botão copiar -->
     <div class="flex flex-col h-full">
       <div id="preview" class="flex-1 overflow-y-auto bg-yellow-100 p-4 rounded-lg border text-base leading-relaxed whitespace-pre-wrap font-mono">
@@ -241,6 +218,23 @@
 
   // Inicializa com os valores padrão
   atualizarPreview();
+
+  function mascaraCPF(input) {
+      let value = input.value.replace(/\D/g, '');
+      if (value.length > 11) value = value.slice(0, 11);
+      value = value.replace(/(\d{3})(\d)/, '$1.$2');
+      value = value.replace(/(\d{3})(\d)/, '$1.$2');
+      value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+      input.value = value;
+    }
+
+    function mascaraContato(input) {
+      let value = input.value.replace(/\D/g, '');
+      if (value.length > 11) value = value.slice(0, 11);
+      value = value.replace(/^(\d{2})(\d)/, '($1) $2');
+      value = value.replace(/(\d{1})(\d{4})(\d{4})$/, '$1 $2-$3');
+      input.value = value;
+    }
 </script>
 
 </body>
