@@ -302,16 +302,11 @@
     atualizarPreview();
   }
 
-  function removerCPFExtra() {
-  // Limpar valores dos campos extras
+ function removerCPFExtra() {
   document.getElementById("cpfExtra").value = "";
   document.getElementById("tipoCpfExtra").value = "";
   document.getElementById("nomeParteExtra").value = "";
-
-  // Esconder o container
   document.getElementById("cpf-extra-container").classList.add("hidden");
-
-  // Atualizar pré-visualização
   atualizarPreview();
 }
 </script>
