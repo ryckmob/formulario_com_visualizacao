@@ -39,6 +39,12 @@
 
       <!-- Campo extra de CPF (inicialmente oculto) -->
       <div id="cpf-extra-container" class="hidden flex flex-col md:flex-row gap-4 flex-wrap">
+        <div class="flex justify-end">
+        <button type="button" onclick="removerCPFExtra()" class="text-sm text-red-600 font-bold hover:text-red-800">
+          ✕ Fechar
+        </button>
+      </div>
+
         <div class="w-full md:w-1/2">
           <label for="cpfExtra" class="block text-sm font-semibold mb-1">CPF Extra</label>
           <input class="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900" type="text" id="cpfExtra" maxlength="14" oninput="mascaraCPF(this)">
@@ -290,6 +296,19 @@
     document.getElementById("cpf-extra-container").classList.remove("hidden");
     atualizarPreview();
   }
+
+  function removerCPFExtra() {
+  // Limpar valores dos campos extras
+  document.getElementById("cpfExtra").value = "";
+  document.getElementById("tipoCpfExtra").value = "";
+  document.getElementById("nomeParteExtra").value = "";
+
+  // Esconder o container
+  document.getElementById("cpf-extra-container").classList.add("hidden");
+
+  // Atualizar pré-visualização
+  atualizarPreview();
+}
 </script>
 
 </body>
