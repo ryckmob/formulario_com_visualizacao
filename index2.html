@@ -11,10 +11,9 @@
       color: #4b2e00;               /* marrom escuro para o texto */
       border: 1px solid #ff9900;    /* laranja vibrante para a borda */
       border-radius: 8px;
-      padding: 15px 5px;            /* 15px em cima/baixo, 5px nas laterais */
+      padding: 15px 15px 15px 15px;
+      margin-top: 1rem;
     }
-
-
   </style>
 </head>
 <body class="bg-yellow-50 p-6 text-yellow-900">
@@ -38,26 +37,28 @@
       </div>
 
       <!-- Campo extra de CPF (inicialmente oculto) -->
-      <div class="flex flex-col lg:flex-row gap-4 flex-wrap w-full">
-
-    <div class="w-full md:w-1/2">
-      <label for="nomeParteExtra" class="block text-sm font-semibold mb-1">Nome da parte adicional</label>
-      <input class="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900" type="text" id="nomeParteExtra">
-    </div>
-    <div class="w-full md:w-1/2">
-      <label for="tipoCpfExtra" class="block text-sm font-semibold mb-1">Tipo</label>
-      <select class="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900" id="tipoCpfExtra">
-        <option value="">Selecione</option>
-        <option value="Cônjuge">Cônjuge</option>
-        <option value="Outro">Outro</option>
-      </select>
-    </div>
-    <div class="w-full md:w-1/2">
-      <label for="cpfExtra" class="block text-sm font-semibold mb-1">CPF Extra</label>
-      <input class="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900" type="text" id="cpfExtra" maxlength="14" oninput="mascaraCPF(this)">
-    </div>
-  </div>
-
+      <div id="cpf-extra-container" class="hidden flex flex-col lg:flex-row gap-4 flex-wrap w-full">
+        <div class="w-full lg:w-1/2">
+          <label for="nomeParteExtra" class="block text-sm font-semibold mb-1">Nome do participante adicional</label>
+          <input class="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900" type="text" id="nomeParteExtra">
+        </div>
+        <div class="w-full lg:w-1/2">
+          <label for="tipoCpfExtra" class="block text-sm font-semibold mb-1">Relação com o comprador</label>
+          <select class="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900" id="tipoCpfExtra">
+            <option value="">Selecione</option>
+            <option value="Cônjuge">Cônjuge</option>
+            <option value="Sócio">Sócio</option>
+            <option value="Outro">Outro</option>
+          </select>
+        </div>
+        <div class="w-full lg:w-1/2">
+          <label for="cpfExtra" class="block text-sm font-semibold mb-1">CPF do participante adicional</label>
+          <input class="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900" type="text" id="cpfExtra" maxlength="14" oninput="mascaraCPF(this)">
+        </div>
+        <div class="w-full flex justify-end mt-2">
+          <button type="button" onclick="removerCPFExtra()" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition">Remover participante adicional</button>
+        </div>
+      </div>
 
       <!-- RESTANTE DO FORMULÁRIO -->
 
@@ -92,8 +93,6 @@
           <input class="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900" type="text" id="profissao">
         </div>
       </div>
-
-      <!-- LINHAS 4 A 9 (mantidas iguais) -->
 
       <!-- LINHA 4 -->
       <div class="flex flex-col md:flex-row gap-4">
@@ -206,103 +205,120 @@
   </div>
 
   <script>
-  const campos = {
-  cliente: "Cliente:",
-  cpf: "CPF:",
-  cpfExtra: "CPF Extra:",
-  tipoCpfExtra: "Tipo do CPF Extra:",
-  nomeParteExtra: "Nome da parte:",
-  renda: "Renda: R$",
-  carteira: "Tem 3 anos de carteira assinada:",
-  dependente: "Tem dependente:",
-  profissao: "Profissão:",
-  cep: "CEP:",
-  endereco: "Endereço:",
-  fgts: "Vai usar FGTS:",
-  email: "E-mail:",
-  contato: "Contato:",
-  imovel: "Imóvel:",
-  localizacaoimovel: "Localização do Imóvel:",
-  corretor: "Corretor:",
-  avaliacao: "Valor de avaliação:",
-  dataEnvio: "Data de envio:",
-  origem: "Origem do Cliente:",
-};
+    const campos = {
+      cliente: "Cliente:",
+      cpf: "CPF:",
+      nomeParteExtra: "Nome do participante adicional:",
+      tipoCpfExtra: "Relação com o comprador:",
+      cpfExtra: "CPF do participante adicional:",
+      renda: "Renda: R$",
+      carteira: "Tem 3 anos de carteira assinada:",
+      dependente: "Tem dependente:",
+      profissao: "Profissão:",
+      cep: "CEP:",
+      endereco: "Endereço:",
+      fgts: "Vai usar FGTS:",
+      email: "E-mail:",
+      contato: "Contato:",
+      imovel: "Imóvel:",
+      localizacaoimovel: "Localização do Imóvel:",
+      corretor: "Corretor:",
+      avaliacao: "Valor de avaliação:",
+      dataEnvio: "Data de envio:",
+      origem: "Origem do Cliente:"
+    };
 
-
-  document.getElementById("dataEnvio").value = new Date().toLocaleDateString('pt-BR');
-
-  const atualizarPreview = () => {
-  let output = "";
-
-  for (const id in campos) {
-    // Verificar se os campos cpfExtra e tipoCpfExtra devem ser exibidos
-    if (
-      (id === "cpfExtra" || id === "tipoCpfExtra" || id === "nomeParteExtra") &&
-      document.getElementById("cpf-extra-container").classList.contains("hidden")
-    ) {
-      continue;
+    function mascaraCPF(input) {
+      let value = input.value.replace(/\D/g, '');
+      if (value.length > 11) value = value.slice(0, 11);
+      value = value.replace(/(\d{3})(\d)/, '$1.$2');
+      value = value.replace(/(\d{3})(\d)/, '$1.$2');
+      value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+      input.value = value;
     }
 
+    function mascaraContato(input) {
+      let value = input.value.replace(/\D/g, '');
+      if (value.length > 11) value = value.slice(0, 11);
+      if (value.length <= 10) {
+        value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+        value = value.replace(/(\d{4})(\d)/, '$1-$2');
+      } else {
+        value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+        value = value.replace(/(\d{5})(\d)/, '$1-$2');
+      }
+      input.value = value;
+    }
 
-    
+    function adicionarCPFExtra() {
+      const container = document.getElementById('cpf-extra-container');
+      container.classList.remove('hidden');
+      atualizarPreview();
+    }
 
-    const el = document.getElementById(id);
-    const label = campos[id];
-    const valor = el ? el.value : "";
-    output += `${label} ${valor}\n`;
-  }
+    function removerCPFExtra() {
+      const container = document.getElementById('cpf-extra-container');
+      container.classList.add('hidden');
+      // Limpar campos extras ao remover
+      document.getElementById('nomeParteExtra').value = '';
+      document.getElementById('tipoCpfExtra').value = '';
+      document.getElementById('cpfExtra').value = '';
+      atualizarPreview();
+    }
 
-  document.getElementById("preview").textContent = output.trim();
-};
+    function atualizarPreview() {
+      let preview = document.getElementById('preview');
+      let texto = '';
 
+      texto += `${campos.cliente} ${document.getElementById('cliente').value || ''}\n`;
+      texto += `${campos.cpf} ${document.getElementById('cpf').value || ''}\n`;
 
-  document.querySelectorAll("#formulario input, #formulario select").forEach(input => {
-    input.addEventListener("input", atualizarPreview);
-    input.addEventListener("change", atualizarPreview);
-  });
+      // Se container dos extras estiver visível, mostrar os campos extras
+      const extraVisivel = !document.getElementById('cpf-extra-container').classList.contains('hidden');
+      if (extraVisivel) {
+        texto += `${campos.nomeParteExtra} ${document.getElementById('nomeParteExtra').value || ''}\n`;
+        texto += `${campos.tipoCpfExtra} ${document.getElementById('tipoCpfExtra').value || ''}\n`;
+        texto += `${campos.cpfExtra} ${document.getElementById('cpfExtra').value || ''}\n`;
+      }
 
-  function copiarTexto() {
-    const texto = document.getElementById("preview").textContent;
-    navigator.clipboard.writeText(texto).then(() => {
-      alert("Texto copiado com sucesso!");
-    }).catch(err => {
-      alert("Erro ao copiar: " + err);
+      texto += `${campos.renda} ${document.getElementById('renda').value || ''}\n`;
+      texto += `${campos.carteira} ${document.getElementById('carteira').value || ''}\n`;
+      texto += `${campos.dependente} ${document.getElementById('dependente').value || ''}\n`;
+      texto += `${campos.profissao} ${document.getElementById('profissao').value || ''}\n`;
+      texto += `${campos.cep} ${document.getElementById('cep').value || ''}\n`;
+      texto += `${campos.endereco} ${document.getElementById('endereco').value || ''}\n`;
+      texto += `${campos.fgts} ${document.getElementById('fgts').value || ''}\n`;
+      texto += `${campos.email} ${document.getElementById('email').value || ''}\n`;
+      texto += `${campos.contato} ${document.getElementById('contato').value || ''}\n`;
+      texto += `${campos.imovel} ${document.getElementById('imovel').value || ''}\n`;
+      texto += `${campos.localizacaoimovel} ${document.getElementById('localizacaoimovel').value || ''}\n`;
+      texto += `${campos.corretor} ${document.getElementById('corretor').value || ''}\n`;
+      texto += `${campos.avaliacao} ${document.getElementById('avaliacao').value || ''}\n`;
+      texto += `${campos.dataEnvio} ${document.getElementById('dataEnvio').value || ''}\n`;
+      texto += `${campos.origem} ${document.getElementById('origem').value || ''}\n`;
+
+      preview.textContent = texto;
+    }
+
+    function copiarTexto() {
+      let texto = document.getElementById('preview').textContent;
+      navigator.clipboard.writeText(texto)
+        .then(() => alert('Texto copiado para a área de transferência!'))
+        .catch(() => alert('Falha ao copiar texto.'));
+    }
+
+    // Atualizar preview ao digitar em qualquer campo relevante
+    document.querySelectorAll('#formulario input, #formulario select').forEach(el => {
+      el.addEventListener('input', atualizarPreview);
     });
-  }
 
-  atualizarPreview();
-
-  function mascaraCPF(input) {
-    let value = input.value.replace(/\D/g, '');
-    if (value.length > 11) value = value.slice(0, 11);
-    value = value.replace(/(\d{3})(\d)/, '$1.$2');
-    value = value.replace(/(\d{3})(\d)/, '$1.$2');
-    value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-    input.value = value;
-  }
-
-  function mascaraContato(input) {
-    let value = input.value.replace(/\D/g, '');
-    if (value.length > 11) value = value.slice(0, 11);
-    value = value.replace(/^(\d{2})(\d)/, '($1) $2');
-    value = value.replace(/(\d{1})(\d{4})(\d{4})$/, '$1 $2-$3');
-    input.value = value;
-  }
-
-  function adicionarCPFExtra() {
-    document.getElementById("cpf-extra-container").classList.remove("hidden");
-    atualizarPreview();
-  }
-
- function removerCPFExtra() {
-  document.getElementById("cpfExtra").value = "";
-  document.getElementById("tipoCpfExtra").value = "";
-  document.getElementById("nomeParteExtra").value = "";
-  document.getElementById("cpf-extra-container").classList.add("hidden");
-  atualizarPreview();
-}
-</script>
-
+    // Preencher data de envio com data atual no formato dd/mm/yyyy
+    window.onload = () => {
+      const hoje = new Date();
+      const dataFormatada = hoje.toLocaleDateString('pt-BR');
+      document.getElementById('dataEnvio').value = dataFormatada;
+      atualizarPreview();
+    };
+  </script>
 </body>
 </html>
