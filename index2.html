@@ -248,11 +248,14 @@
   for (const id in campos) {
     // Verificar se os campos cpfExtra e tipoCpfExtra devem ser exibidos
     if (
-      (id === "cpfExtra" || id === "tipoCpfExtra") &&
+      (id === "cpfExtra" || id === "tipoCpfExtra" || id === "nomeParteExtra") &&
       document.getElementById("cpf-extra-container").classList.contains("hidden")
     ) {
-      continue; // pula esses campos se o container está oculto
+      continue;
     }
+
+
+    
 
     const el = document.getElementById(id);
     const label = campos[id];
