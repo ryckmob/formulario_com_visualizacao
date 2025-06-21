@@ -225,15 +225,26 @@
   document.getElementById("dataEnvio").value = new Date().toLocaleDateString('pt-BR');
 
   const atualizarPreview = () => {
-    let output = "";
-    for (const id in campos) {
-      const el = document.getElementById(id);
-      const label = campos[id];
-      const valor = el ? el.value : "";
-      output += `${label} ${valor}\n`;
+  let output = "";
+
+  for (const id in campos) {
+    // Verificar se os campos cpfExtra e tipoCpfExtra devem ser exibidos
+    if (
+      (id === "cpfExtra" || id === "tipoCpfExtra") &&
+      document.getElementById("cpf-extra-container").classList.contains("hidden")
+    ) {
+      continue; // pula esses campos se o container está oculto
     }
-    document.getElementById("preview").textContent = output.trim();
-  };
+
+    const el = document.getElementById(id);
+    const label = campos[id];
+    const valor = el ? el.value : "";
+    output += `${label} ${valor}\n`;
+  }
+
+  document.getElementById("preview").textContent = output.trim();
+};
+
 
   document.querySelectorAll("#formulario input, #formulario select").forEach(input => {
     input.addEventListener("input", atualizarPreview);
